@@ -1,26 +1,32 @@
-<%@page import="entity.*"%>
 <%@page import="java.util.List"%>
-<%@page import="dao.*"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@page import="poly.java4.entities.Cart"%>
+<%@page import="poly.java4.dao.ProductDao"%>
+<%@page import="poly.java4.entities.product"%>
+<%@page import="poly.java4.dao.ProductDaoImpl"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<title>Product</title>
+<jsp:include page="_meta.jsp"></jsp:include>
+<jsp:include page="_link.jsp"></jsp:include>
 </head>
 <body>
-<jsp:include page="headerProduct.jsp"></jsp:include>
-
-<%
-		
-				productDao pDao= new productDao();
-		List<product> list = pDao.getProduct();
+	<jsp:include page="_topbar.jsp"></jsp:include>
+	<jsp:include page="_menu.jsp"></jsp:include>
+	<%
+		ProductDaoImpl pd = new ProductDaoImpl();
+		List<product> ds = pd.getListProduct();
 		String page1 = "", page2 = "";
 		int start = 0;
-		int end=5;
-		if(list.size()<5){
-			end=list.size();
+		int end;
+		if (ds.size() < 18) {
+			end = 9;
+		}else{
+			end=ds.size();
 		}
-		
+
 		if (request.getParameter("start") != null) {
 			page1 = request.getParameter("start");
 			start = Integer.parseInt(page1);
@@ -29,106 +35,113 @@
 			page2 = request.getParameter("end");
 			end = Integer.parseInt(page2);
 		}
-		List<product> listPage = productDao.getListProductPage(list, start, end);
-		%>
-	
-	<form action="insertProduct" method="post">
-		<div class="add-wrap">
-			<div class="add-window">
-				<input type="text" name="nameProduct" placeholder="Tên sản phẩm ............." />
-				<input type="number" name="price"  placeholder="Giá ............."/>
-				<input type="number" name="quantity"  placeholder="Số lượng ............." />
-				<input type="text" name="describe" placeholder="Mô tả ............." />
-				 <input type="file" name="productInmage" />			
-			<br>Loại sản phẩm :
-				<select type="text" style="padding-right: 230px;" name="idProductType"  >
-			<% productTypeDao ptDao = new productTypeDao();
-			List<productType> listpt = ptDao.getProductType();
-				for(productType pt : listpt){
-			%>
-					<option><%=pt.getIdProductType() %></option>
-					<%
-				}
-					%>					
-					</select>
-			</br>		
-				<button type="submit" name="action" value="Insert">Thêm</button>
+		List<product> list = pd.getListProductByPagination(ds, start, end);
+	%>
+
+	<%
+		Cart cart = (Cart) session.getAttribute("cart");
+		if (cart == null) {
+			cart = new Cart();
+			session.setAttribute("cart", cart);
+		}
+	%>
+	<div id="content">
+		<div class="container">
+
+			<div class="col-md-12">
+				<ul class="breadcrumb">
+					<li><a href="#">Home</a></li>
+					<li>Product</li>
+				</ul>
 			</div>
-		</div>
-	</form>
+			<jsp:include page="_menufilter.jsp"></jsp:include>
 
-	<div class="add-new-btn">
-		<i class="material-icons">add</i>
-	</div>
-	<div class="tool-tip">Thêm mới</div>
-	<div class="tool-tip-tri"></div>
+			<div class="col-md-9">
 
-	<br />
-	<h2 style="text-align: center;"> Quản lý sản phẩm</h2>
-	<div class="tableSearch">
-		<table class="responstable">
-			<tr>
-				<th>Mã sản phẩm</th>
-				<th>Tên sản phẩm</th>
-				<th>Giá</th>
-				<th>Số lượng</th>
-				<th>Mô tả</th>
-				<th>Hình ảnh</th>
-				<th>Loại sản phẩm</th>
-				<th>Chỉnh sửa</th>
-				<th>Xóa</th>
-			</tr>
-				 <%
-							for (product p : listPage) {										
-							%>
-			<form action="deleteProduct" method="post">
-					<tr>
-						<td><%=p.getIdProduct()%></td>
-						<td><%=p.getNameProduct()%></td>
-						<td><%=p.getPrice()%></td>
-						<td><%=p.getQuantity()%></td>
-						<td><%=p.getDescribe()%></td>
-						<td><img src="img/<%=p.getProductInmage()%>" width="50px" height="50px"></img></td>
-							<td><%=p.getIdProductType()%></td>
-						<td><a href='updateProduct.jsp?idProduct=<%=p.getIdProduct()%>'>Chỉnh sửa</a></td>
-
-						<td><input type="hidden" name="idProduct" value="<%=p.getIdProduct()%>">
-							<button type="submit" name="action" value="Delete"
-								onclick="return confirm('bạn có muốn xóa ???')">
-								<i class="fa fa-2x fa-trash-o"></i></td> 
-					</tr>
+				<div class="row products">
+					<%
+						for (product p : list) {
+					%>
+					<form action="CartServlet">
+						<div class="col-md-4 col-sm-6">
+							<div class="product">
+								<div class="flip-container">
+									<div class="flipper">
+										<div class="front">
+											<a href="Detail.jsp?idProduct=<%=p.getIdProduct()%>"> <img
+												src="<%=p.getProductInmage()%>"
+												alt="<%=p.getNameProduct()%>" class="img-responsive">
+											</a>
+										</div>
+										<div class="back">
+											<a href="Detail.jsp?idProduct=<%=p.getIdProduct()%>"> <img
+												src="<%=p.getProductInmage()%>"
+												alt="<%=p.getNameProduct()%>" class="img-responsive">
+											</a>
+										</div>
+									</div>
+								</div>
+								<a href="Detail.jsp?idProduct=<%=p.getIdProduct()%>"
+									class="invisible"> <img src="<%=p.getProductInmage()%>"
+									alt="" class="img-responsive">
+								</a>
+								<div class="text">
+									<h3>
+										<a href="Detail.jsp?idProduct=<%=p.getIdProduct()%>"><%=p.getDescribe()%></a>
+									</h3>
+									<p class="price"><%=p.getPrice()%>
+										VND
+									</p>
+									<p class="buttons">
+										<a href="Detail.jsp?idProduct=<%=p.getIdProduct()%>"
+											class="btn btn-default">View detail</a> <a
+											href="CartServlet?command=insertItem&idProduct=<%=p.getIdProduct()%>&cartId=<%=System.currentTimeMillis()%>"
+											class="btn btn-primary"
+											onclick="return confirm('bạn có muốn thêm sản phẩm không???')"><i
+											class="fa fa-shopping-cart"></i>Add to cart</a>
+									</p>
+								</div>
+								<!-- /.text -->
+							</div>
+							<!-- /.product -->
+						</div>
 					</form>
-				<%
-				}
-			%>		
+					<%
+						}
+					%>
+				</div>
 
-		</table>
-		<div style="text-align: center;" class="pages">
-                    <ul class="pagination">
-                     <li><a href="#">&laquo;</a></li> 
-		<%
-				int a, b;
-				int limit = list.size() / 6;
-				if (limit * 6 < list.size()) {
-					limit += 1;
-				}
-				for (int i = 1; i <= limit; i++) {
-					a = (i - 1) * 6;
-					b = i * 6;
-					if (b > list.size()) {
-						b = list.size();
-					}
-			%>		   
-                         <li class="active"><a href="product.jsp?start=<%=a%>&end=<%=b%>"><%=i%></a>
-                        </li>    
-			<%
-				}
-			%> 
-			<li><a href="#">&raquo;</a></li>
-	 				</ul>
-                </div>
+			</div>
+			<div class="pages">
+				<ul class="pagination">
+					<%
+						int a, b;
+						int limit = ds.size() / 9;
+						if (limit * 9 < ds.size()) {
+							limit += 1;
+						}
+						for (int i = 1; i <= limit; i++) {
+							a = (i - 1) * 9;
+							b = i * 9;
+							if (b > ds.size()) {
+								b = ds.size();
+							}
+					%>
+					<li class="active"><a
+						href="Product.jsp?start=<%=a%>&end=<%=b%>"><%=i%></a></li>
+					<%
+						}
+					%>
+				</ul>
+			</div>
+			<!-- /.col-md-9 -->
+		</div>
+		<!-- /.container -->
 	</div>
+	<!-- /#content -->
 
-<jsp:include page="footer.jsp"></jsp:include>
+	<jsp:include page="_footer.jsp"></jsp:include>
+
+	<jsp:include page="_js.jsp"></jsp:include>
 </body>
 </html>
