@@ -14,7 +14,7 @@
     <meta name="keywords" content="">
 
     <title>
-        Obaju 
+        CH
     </title>
 
     <meta name="keywords" content="">
@@ -72,7 +72,7 @@ _________________________________________________________ -->
 _________________________________________________________ -->
 
 <div class="navbar navbar-default yamm" role="navigation" id="navbar">
-    <div class="container" style="background-color: BLANCHEDALMOND;">
+    <div class="container" style="background-color:gold">
         <div class="navbar-header">
 
             <a class="navbar-brand home" href="index.jsp" data-animate-hover="bounce">
@@ -88,7 +88,7 @@ _________________________________________________________ -->
                 <li class="active"><a href="index.jsp">Trang chủ</a>
                 </li>
                 <li class="dropdown yamm-fw">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">Cửa hàng <b class="caret"></b></a>
+                    <a href="index.jsp" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">Cửa hàng <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
                             <div class="yamm-content">
@@ -96,31 +96,30 @@ _________________________________________________________ -->
                                     <div class="col-sm-3">
                                         <h5>Thời trang phụ nữ</h5>
                                         <ul>
-                                            <li><a href="category.html">Accessories</a>
+                                            <li><a href="index.jsp">Accessories</a>
                                             </li>
                                         </ul>
                                     </div>
                                     <div class="col-sm-3">
                                         <h5>Thời trang cho bé</h5>
                                         <ul>
-                                            <li><a href="category.html">Trainers</a>
+                                            <li><a href="index.jsp">Trainers</a>
                                             </li>
                                         </ul>
                                     </div>
                                     <div class="col-sm-3">
                                         <h5>Thời trang  đàn ông</h5>
                                         <ul>
-                                            <li><a href="category.html">Trainers</a>
+                                            <li><a href="index.jsp">Trainers</a>
                                             </li>
                                         </ul>
                                     </div>
                                     <div class="col-sm-3">
                                         <h5>Trang phục dạ hội</h5>
                                         <ul>
-                                            <li><a href="category.html">Trainers</a>
+                                            <li><a href="index.jsp">Trainers</a>
                                             </li>
                                         </ul>
-
                                     </div>
                                 </div>
                             </div>
@@ -148,6 +147,8 @@ _________________________________________________________ -->
 
     </div>
     <!-- /.container -->
+    
+        
 </div>
 <!-- /#navbar -->
 

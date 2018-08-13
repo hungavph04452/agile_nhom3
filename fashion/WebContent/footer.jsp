@@ -52,8 +52,8 @@ _________________________________________________________ -->
 
                     <h4>Nơi để tìm thấy chúng tôi</h4>
 
-                    <p><strong>Obaju </strong>
-                        <br>Đống Đa
+                    <p><strong>CH</strong>
+                        <br>303, nhà H, Nguyễn Đổng Chi, Hàm Nghi
                         <br>Hà Nội
                         <br>
                         <strong>Việt Nam</strong>

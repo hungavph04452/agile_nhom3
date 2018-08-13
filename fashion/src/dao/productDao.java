@@ -103,7 +103,7 @@ public class productDao {
 			tr.begin();
 		 String hql="from product";
 		 if (idProduct > 0) {
-			 hql += " where idProduct="+idProduct;
+			 hql += " where idProduct="+idProduct +" ORDER BY DESC";
 		}
 		 System.out.println(hql);
 			listP = session.createQuery(hql).list();

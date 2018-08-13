@@ -1,85 +1,75 @@
-<%@page import="poly.java4.entities.invoice"%>
-<%@page import="poly.java4.dao.InvoiceDaoImpl"%>
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Date"%>
+<%@page import="entity.*"%>
+<%@page import="java.util.List"%>
+<%@page import="dao.*"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>Invoice</title>
-<jsp:include page="_meta.jsp"></jsp:include>
-<jsp:include page="_link.jsp"></jsp:include>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
 </head>
 <body>
-	<jsp:include page="_topbar.jsp"></jsp:include>
-	<jsp:include page="_menu.jsp"></jsp:include>
-
+	<jsp:include page="headerInvoice.jsp"></jsp:include>
 	<%
-		InvoiceDaoImpl idl = new InvoiceDaoImpl();
+		invoiceDao inDao = new invoiceDao();
+		List<invoice> list = inDao.getInvoice();
 	%>
-	<div id="content">
-		<div class="container">
+	<br />
 
-			<div class="col-md-12">
-				<ul class="breadcrumb">
-					<li><a href="#">Home</a></li>
-					<li>Invoice</li>
-				</ul>
-			</div>
-			<jsp:include page="_menufilter.jsp"></jsp:include>
+	<h2 style="text-align: center;">Quản lý đơn hàng</h2>
 
-			<div class="col-md-9">
+	<p>
+		<font style="font-size: large;">Chú thích trạng thái (*)</font> <br> <font style="color: blue;"> 0 : Chờ xác
+			nhận </font> <font style="color: red;">1 : Chưa xác nhận</font> <br> <font
+			style="color: fuchsia;">2 : Đã xác nhận</font> <font
+			style="color: orange;">3 : Hủy</font>
+	</p>
 
-				<div class="box info-bar">
-					<div class="row"></div>
-				</div>
+	<div class="tableSearch">
 
-				<div class="row products">
-					<form>
-						<table border="2px" cellpadding="2px" cellspacing="2px">
-							<tr>
-								<td>IdInvoice</td>
-								<td>IdAccount</td>
-								<td>Name</td>
-								<td>Phone</td>
-								<td>Address</td>
-								<td>Date</td>
-								<td>Total</td>
-								<td>Status</td>
-								<td></td>
-							</tr>
-							<%
-								for (invoice i : idl.getListInvoice()) {
-							%>
-							<tr>
-								<td><%=i.getIdInvoice() %></td>
-								<td><%=i.getIdAccount() %></td>
-								<td><%=i.getName() %></td>
-								<td><%=i.getPhoneNumber() %></td>
-								<td><%=i.getAddressNumber() %></td>
-								<td><%=i.getDate() %></td>
-								<td><%=i.getTotal() %></td>
-								<td><%=i.getStatus() %></td>
-								<td>
-									<a href="InvoiceUpdate.jsp?idInvoice=<%=i.getIdInvoice() %>">Edit</a>
-								</td>
-							</tr>
-								<%
-									}
-								%>
-							
-						</table>
-					</form>
-				</div>
+		<table class="responstable">
 
-			</div>
-			<!-- /.col-md-9 -->
-		</div>
-		<!-- /.container -->
+			<tr>
+				<th>STT</th>
+				<th>Mã hóa đơn</th>
+				<th>Tên khách hàng</th>
+				<th>Số điện thoại</th>
+				<th>Địa chỉ</th>
+				<th>Ngày</th>
+				<th>Trạng thái</th>
+				<th>Tổng tiền</th>
+				<th>Mã tài khoản</th>
+				<th>Chỉnh sửa</th>
+			</tr>
+			<%
+				int count = 0;
+				for (invoice in : list) {
+			%>
+			<form action="invoice" method="post">
+				<tr>
+					<td><%=count++%></td>
+					<td><a href="detailInvoice?idInvoice=<%=in.getIdInvoice()%>"><%=in.getIdInvoice()%></a></td>
+					<td><%=in.getName()%></td>
+					<td><%=in.getPhoneNumber()%></td>
+					<td><%=in.getAddressNumber()%></td>
+					<td><%=in.getDate()%></td>
+					<td><%=in.getStatus()%></td>
+					<td><%=in.getTotal()%></td>
+					<td><%=in.getIdAccount()%></td>
+					<td><a
+						href='invoiceUpdate.jsp?idInvoice=<%=in.getIdInvoice()%>'>Chỉnh
+							sửa</a></td>
+				</tr>
+			</form>
+			<%
+				}
+			%>
+		</table>
+
 	</div>
-	<!-- /#content -->
-
-	<jsp:include page="_footer.jsp"></jsp:include>
-
-	<jsp:include page="_js.jsp"></jsp:include>
+	<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

@@ -26,7 +26,7 @@
     <meta name="keywords" content="">
 
     <title>
-        Obaju 
+        CH 
     </title>
 
     <meta name="keywords" content="">
@@ -107,9 +107,8 @@ _________________________________________________________ -->
     <div class="container">
         <div class="navbar-header">
 
-            <a class="navbar-brand home" href="indexManager.jsp" data-animate-hover="bounce">
-                <img src="img/logo.png" alt="Obaju logo" class="hidden-xs">
-                <img src="img/logo-small.png" alt="Obaju logo" class="visible-xs"><span class="sr-only">Obaju</span>
+           <a class="navbar-brand home" href="index.jsp" data-animate-hover="bounce">
+                <img src="img/logo.jpg" alt="Obaju logo" class="hidden-xs" style="width:100px; height:100%;"><span class="sr-only">CH</span>
             </a>
 
         </div>
@@ -123,7 +122,7 @@ _________________________________________________________ -->
 
 
                     <li class="dropdown yamm-fw">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">Cửa hàng <b class="caret"></b></a>
+                        <a href="index.jsp" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">Cửa hàng <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li>
                                 <div class="yamm-content">
@@ -131,28 +130,28 @@ _________________________________________________________ -->
                                     <div class="col-sm-3">
                                         <h5>Thời trang phụ nữ</h5>
                                         <ul>
-                                            <li><a href="category.html">Accessories</a>
+                                            <li><a href="index.jsp">Accessories</a>
                                             </li>
                                         </ul>
                                     </div>
                                     <div class="col-sm-3">
                                         <h5>Thời trang cho bé</h5>
                                         <ul>
-                                            <li><a href="category.html">Trainers</a>
+                                            <li><a href="index.jsp">Trainers</a>
                                             </li>
                                         </ul>
                                     </div>
                                     <div class="col-sm-3">
                                         <h5>Thời trang  đàn ông</h5>
                                         <ul>
-                                            <li><a href="category.html">Trainers</a>
+                                            <li><a href="index.jsp">Trainers</a>
                                             </li>
                                         </ul>
                                     </div>
                                     <div class="col-sm-3">
                                         <h5>Trang phục dạ hội</h5>
                                         <ul>
-                                            <li><a href="category.html">Trainers</a>
+                                            <li><a href="index.jsp">Trainers</a>
                                             </li>
                                         </ul>
 
