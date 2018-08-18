@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 13, 2018 at 06:18 PM
+-- Generation Time: Aug 18, 2018 at 02:50 AM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `account` (
 --
 
 INSERT INTO `account` (`username`, `password`, `fullname`, `phone`, `email`, `address`, `roles`, `idAccount`) VALUES
-('admin', '12345', 'Nguyen Van A', '01677653209', 'anv@gmail.com', 'Ha Noi', b'1', 1),
+('admin', 'admin', 'Nguyen Van A', '01677653209', 'anv@gmail.com', 'Ha Noi', b'1', 1),
 ('donglv', '12345', 'Le Van Dong', '01677653209', 'donglvph04407@fpt.edu.vn', 'Thai Binh', b'0', 2),
 ('hungav', '12345', 'An Viet Hung', '01677653209', 'hungavph04452@fpt.edu.vn', 'Ninh Binh', b'0', 3),
 ('dainv', '12345', 'Nguyen Van Dai', '01677653209', 'datlvph04487@fpt.edu.vn', 'Ninh Binh', b'0', 4);
@@ -165,7 +165,7 @@ ALTER TABLE `invoice`
 -- Indexes for table `product`
 --
 ALTER TABLE `product`
- ADD PRIMARY KEY (`idProduct`);
+ ADD PRIMARY KEY (`idProduct`), ADD KEY `idProductType` (`idProductType`);
 
 --
 -- Indexes for table `producttype`
@@ -202,10 +202,10 @@ MODIFY `idProductType` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 
 --
--- Constraints for table `invoice`
+-- Constraints for table `product`
 --
-ALTER TABLE `invoice`
-ADD CONSTRAINT `invoice_ibfk_1` FOREIGN KEY (`idInvoice`) REFERENCES `account` (`idAccount`);
+ALTER TABLE `product`
+ADD CONSTRAINT `product_ibfk_1` FOREIGN KEY (`idProductType`) REFERENCES `producttype` (`idProductType`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
